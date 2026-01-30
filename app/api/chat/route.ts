@@ -1,10 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
 
-const openai = new OpenAI({
-  baseURL: process.env.AI_BUILDER_API_BASE_URL || 'https://space.ai-builders.com/backend/v1',
-  apiKey: process.env.AI_BUILDER_TOKEN,
-})
+// Force dynamic rendering - this route should not be built at build time
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
+// Initialize OpenAI client lazily (not at module load time)
+function getOpenAIClient() {
+  return new OpenAI({
+    baseURL: process.env.AI_BUILDER_API_BASE_URL || 'https://space.ai-builders.com/backend/v1',
+    apiKey: process.env.AI_BUILDER_TOKEN,
+  })
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -45,6 +52,7 @@ export async function POST(req: NextRequest) {
       )
     }
 
+    const openai = getOpenAIClient()
     const completion = await openai.chat.completions.create({
       model: model,
       messages: validMessages,
