@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat Assistant</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar for chat history -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Chat History</h2>
+                <button id="newChatBtn" class="new-chat-btn">+ New Chat</button>
+            </div>
+            <div id="chatHistory" class="chat-history">
+                <!-- Chat history items will be added here -->
+            </div>
+        </div>
+
+        <!-- Main chat area -->
+        <div class="main-content">
+            <div class="chat-header">
+                <h1>AI Chat Assistant</h1>
+            </div>
+            
+            <div id="chatMessages" class="chat-messages">
+                <div class="welcome-message">
+                    <h2>Welcome!</h2>
+                    <p>Start a conversation by typing a message below.</p>
+                    <p>I can search the web and read web pages to help answer your questions.</p>
+                </div>
+            </div>
+
+            <!-- Thinking animation container -->
+            <div id="thinkingIndicator" class="thinking-indicator" style="display: none;">
+                <div class="thinking-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span class="thinking-text">Thinking...</span>
+            </div>
+
+            <div class="chat-input-container">
+                <form id="chatForm" class="chat-form">
+                    <textarea 
+                        id="messageInput" 
+                        class="message-input" 
+                        placeholder="Type your message here..." 
+                        rows="1"
+                    ></textarea>
+                    <button type="submit" id="sendBtn" class="send-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
