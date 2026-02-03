@@ -14,8 +14,12 @@
     "test:dev": "npm run test:watch",
     "quality": "npm run lint && npm run test:ci",
     "enhance-image": "node scripts/enhance-image.js",
-    "deploy": "node deploy-simple.js",
-    "update": "node update-deployment.js"
+    "deploy": "node do-deploy.js",
+    "deploy-simple": "node deploy-simple.js",
+    "update": "node update-deployment.js",
+    "check": "node check-deployment.js",
+    "logs": "node check-logs.js",
+    "fix-deploy": "node fix-and-deploy.js"
   },
   "dependencies": {
     "lucide-react": "^0.344.0",
