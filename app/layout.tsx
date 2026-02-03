@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'This-Is-For - AI Chat Interface',
+  title: 'This-Is-For',
   description: 'This-Is-For - Your AI chat companion powered by AI Builder API',
 }
 
