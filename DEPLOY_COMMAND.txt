@@ -1,0 +1,6 @@
+# Copy and paste this command to deploy:
+
+curl -X POST "https://space.ai-builders.com/backend/v1/deployments" \
+  -H "Authorization: Bearer sk_113c9059_00bdfce4fd872093b49b3649bb76f1d6d40f" \
+  -H "Content-Type: application/json" \
+  -d '{"repo_url":"https://github.com/peachgcm/ChatGPTClone","service_name":"this-is-for","branch":"main","port":3000}'
