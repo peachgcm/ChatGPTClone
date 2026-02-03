@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import OpenAI from 'openai'
+import OpenAI from 'openai/index.mjs'
 
 // Force dynamic rendering - this route should not be built at build time
 export const dynamic = 'force-dynamic'

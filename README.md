@@ -1,4 +1,4 @@
-# AI Chat GUI - ChatGPT Clone
+# This-Is-For - AI Chat Interface
 
 A modern ChatGPT-like interface built with Next.js, featuring a two-column layout with conversation management and AI chat powered by the AI Builder API (using Groq's grok-4-fast model).
 
@@ -49,7 +49,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see the a
 ## Project Structure
 
 ```
-ai-chat-api/
+this-is-for/
 ├── app/
 │   ├── api/
 │   │   └── chat/
