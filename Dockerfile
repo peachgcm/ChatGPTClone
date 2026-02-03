@@ -15,21 +15,26 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Set build-time environment variables
+ENV NEXT_TELEMETRY_DISABLED=1
+
 # Build Next.js app
+# This will create .next/standalone directory with server.js
 RUN npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Create a non-root user
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # Copy necessary files from standalone build
-# Public directory is optional - only copy if it exists
+# Next.js standalone mode creates a complete server in .next/standalone
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
@@ -38,11 +43,10 @@ USER nextjs
 # Expose port (PORT will be set at runtime by Koyeb)
 EXPOSE 3000
 
-# Set PORT environment variable and start Next.js
-# Next.js standalone mode reads PORT from environment
+# Set PORT and HOSTNAME environment variables
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-# Start Next.js using PORT environment variable
-# Use shell form to ensure environment variable expansion
-CMD sh -c "PORT=${PORT:-3000} node server.js"
+# Start Next.js server
+# In standalone mode, server.js is in the root of the copied standalone directory
+CMD ["node", "server.js"]
