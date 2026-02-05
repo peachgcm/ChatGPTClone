@@ -38,6 +38,9 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# Ensure we have package.json for any runtime dependencies
+COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
+
 USER nextjs
 
 # Expose port (PORT will be set at runtime by Koyeb)
