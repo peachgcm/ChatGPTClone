@@ -38,18 +38,17 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Set working directory to the standalone directory
-WORKDIR /app
-
 USER nextjs
 
 # Expose port (PORT will be set at runtime by Koyeb)
 EXPOSE 3000
 
-# Set PORT and HOSTNAME environment variables
+# Set default PORT and HOSTNAME environment variables
+# Koyeb will override PORT at runtime
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
 # Start Next.js server
 # In standalone mode, server.js is in the root of the copied standalone directory
+# Next.js automatically uses PORT and HOSTNAME env vars
 CMD ["node", "server.js"]
